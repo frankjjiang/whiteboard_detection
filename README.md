@@ -56,4 +56,10 @@ First, correctly place our custom configuration files by moving
 ```yolov3-tiny_whiteboard.cfg```, ```whiteboard.names```, ```whiteboard.data```
 to ```darknet/cfg```.
 
-To be continued...
+Then, download the [yolov3-tiny weights](https://pjreddie.com/media/files/yolov3-tiny.weights),
+and get the pre-trained weights by calling ```./darknet partial cfg/yolov3-tiny.cfg yolov3-tiny.weights yolov3-tiny.conv.15 15```
+
+Finally, start the training by calling:
+```bash
+./darknet detector train cfg/whiteboard.data cfg/yolov3-tiny_whiteboard.cfg yolov3-tiny.conv.15
+```
