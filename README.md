@@ -70,6 +70,7 @@ Finally, start the training by calling:
 Watch the total loss, when it looks like it has converged, stop the training. Knowing when to stop, is a bit of an art, but for the whiteboard dataset, so far 0.5 has been a typical total loss to converge to.
 For example, see the following learning curve:
 
+![learning-curve-example](./chart_yolov3-tiny_whiteboard.png)
 
 ## Testing
 
@@ -80,6 +81,8 @@ First, copy ```yolov3-tiny_whiteboard.weights``` to the darknet folder. Then cal
 ```
 and choose an example image to test on (e.g. ```data/whiteboard/02eb3145e144ea41.jpg```).
 The result should look something like this:
+
+![detection-example](./random_detection_example.jpg)
 
 ### Video Test
 To run the network on a video, call:
