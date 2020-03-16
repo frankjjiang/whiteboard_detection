@@ -13,7 +13,10 @@ Then, get the default yolo weights to test:
 2. Click on "yolov3.weights" link, this download will take a while
 3. Move it to the darknet folder from downloads. (e.g. Downloads/yolov3.weights -> darknet/yolov3.weights)
 
-Finally, test by running: ./darknet detector test ./cfg/coco.data ./cfg/yolov3.cfg ./yolov3.weights.
+Finally, test by running: 
+```bash
+./darknet detector test ./cfg/coco.data ./cfg/yolov3.cfg ./yolov3.weights.
+```
 *Note, if you are using a CPU the darknet execution will be slow, so be patient.* For more involved
 examples run one of the [examples](https://github.com/AlexeyAB/darknet#how-to-use-on-the-command-line).
 
@@ -28,7 +31,7 @@ First, download bounding box annotations file by:
 2. Clicking "Train" in the "Boxes" row, this download will take a while.
 3. Moving ```oidv6-train-annotations-bbox.csv``` into ```darknet/data/```.
 
-Then, correctly place our custom whiteboard dataset downloading python script by moving
+Then, correctly place our custom whiteboard dataset downloading python script by copying
 ```get_whiteboard_dataset.py``` from this repository into ```darknet/scripts/```.
 
 The download script uses awscli which can be downloaded by running:
@@ -52,7 +55,7 @@ python3 ./scripts/get_whiteboard_dataset.py
 This will take quite a long time.
 
 ## Training
-First, correctly place our custom configuration files by moving
+First, correctly place our custom configuration files by copying
 ```yolov3-tiny_whiteboard.cfg```, ```whiteboard.names```, ```whiteboard.data```
 to ```darknet/cfg```, and move ```train.txt``` to ```darknet/data```
 
@@ -63,4 +66,20 @@ Then, download the [yolov3-tiny weights](https://pjreddie.com/media/files/yolov3
 Finally, start the training by calling:
 ```bash
 ./darknet detector train cfg/whiteboard.data cfg/yolov3-tiny_whiteboard.cfg yolov3-tiny.conv.15
+```
+Watch the total loss, when it looks like it has converged, stop the training. Knowing when to stop, is a bit of an art, but for the whiteboard dataset, so far 0.6 has been a typical total loss to converge to.
+
+## Testing
+
+### Single image
+First, copy ```yolov3-tiny_whiteboard.weights``` to the darknet folder. Then call:
+```bash
+./darknet detector test ./cfg/whiteboard.data ./cfg/yolov3-tiny_whiteboard.cfg ./yolov3-tiny_whiteboard.weights
+```
+and choose an example image to test on (e.g. ```data/whiteboard/02eb3145e144ea41.jpg```.
+
+### Video Test
+
+```bash
+./darknet detector demo ./cfg/whiteboard.data ./cfg/yolov3-tiny_whiteboard.cfg yolov3-tiny_whiteboard.weights <video-path> -out_filename res.avi
 ```
