@@ -67,7 +67,9 @@ Finally, start the training by calling:
 ```bash
 ./darknet detector train cfg/whiteboard.data cfg/yolov3-tiny_whiteboard.cfg yolov3-tiny.conv.15
 ```
-Watch the total loss, when it looks like it has converged, stop the training. Knowing when to stop, is a bit of an art, but for the whiteboard dataset, so far 0.6 has been a typical total loss to converge to.
+Watch the total loss, when it looks like it has converged, stop the training. Knowing when to stop, is a bit of an art, but for the whiteboard dataset, so far 0.5 has been a typical total loss to converge to.
+For example, see the following learning curve:
+
 
 ## Testing
 
@@ -76,10 +78,11 @@ First, copy ```yolov3-tiny_whiteboard.weights``` to the darknet folder. Then cal
 ```bash
 ./darknet detector test ./cfg/whiteboard.data ./cfg/yolov3-tiny_whiteboard.cfg ./yolov3-tiny_whiteboard.weights
 ```
-and choose an example image to test on (e.g. ```data/whiteboard/02eb3145e144ea41.jpg```.
+and choose an example image to test on (e.g. ```data/whiteboard/02eb3145e144ea41.jpg```).
+The result should look something like this:
 
 ### Video Test
-
+To run the network on a video, call:
 ```bash
 ./darknet detector demo ./cfg/whiteboard.data ./cfg/yolov3-tiny_whiteboard.cfg yolov3-tiny_whiteboard.weights <video-path> -out_filename res.avi
 ```
